@@ -1,0 +1,90 @@
+{
+	"Name": "herdr Tickets for Jira",
+	"Version": "0.1.0.0",
+	"Author": "Box of Raccoons",
+	"Actions": [
+		{
+			"Name": "Status Count",
+			"UUID": "com.boxofraccoons.jira-herdr.status",
+			"Icon": "imgs/actions/status/icon",
+			"Tooltip": "Count your open-sprint tickets in one status. Press to open them in Jira.",
+			"PropertyInspectorPath": "ui/status.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"DisableAutomaticStates": true,
+			"States": [
+				{
+					"Image": "imgs/actions/status/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"Name": "Project Dial",
+			"UUID": "com.boxofraccoons.jira-herdr.project-dial",
+			"Icon": "imgs/actions/project-dial/icon",
+			"Tooltip": "Turn to browse projects with To Do tickets in open sprints; press to choose.",
+			"PropertyInspectorPath": "ui/common.html",
+			"Controllers": [
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/browse.json",
+				"TriggerDescription": {
+					"Rotate": "Browse projects",
+					"Push": "Choose",
+					"Touch": "Choose"
+				}
+			},
+			"States": [
+				{
+					"Image": "imgs/actions/project-dial/key"
+				}
+			]
+		},
+		{
+			"Name": "Ticket Dial",
+			"UUID": "com.boxofraccoons.jira-herdr.ticket-dial",
+			"Icon": "imgs/actions/ticket-dial/icon",
+			"Tooltip": "Turn to browse To Do tickets; press twice to send one to herdr as a new agent.",
+			"PropertyInspectorPath": "ui/ticket.html",
+			"Controllers": [
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/browse.json",
+				"TriggerDescription": {
+					"Rotate": "Browse tickets",
+					"Push": "Press twice to send to herdr",
+					"Touch": "Open in Jira"
+				}
+			},
+			"States": [
+				{
+					"Image": "imgs/actions/ticket-dial/key"
+				}
+			]
+		}
+	],
+	"Category": "herdr Tickets for Jira",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Your open-sprint Jira tickets on Stream Deck: count them by status, browse To Do tickets on the dials, and send one to herdr as a new agent session.",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 3,
+	"Software": {
+		"MinimumVersion": "7.1"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "13"
+		}
+	],
+	"Nodejs": {
+		"Version": "24",
+		"Debug": "enabled"
+	},
+	"UUID": "com.boxofraccoons.jira-herdr"
+}

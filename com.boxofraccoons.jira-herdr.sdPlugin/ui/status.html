@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>Status Count Settings</title>
+	<meta charset="utf-8" />
+	<script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+</head>
+<body>
+	<sdpi-item label="Status">
+		<sdpi-select setting="status" datasource="getStatuses" show-refresh loading="Loading statuses…" placeholder="Choose a status"></sdpi-select>
+	</sdpi-item>
+	<sdpi-item label="Project">
+		<sdpi-select setting="project" datasource="getProjects" show-refresh loading="Loading…" default=""></sdpi-select>
+	</sdpi-item>
+	<sdpi-item>
+		<p style="margin:0;font-size:9pt;opacity:.7">Counts your tickets in open sprints with this status. Press to open them in Jira.</p>
+	</sdpi-item>
+	<script src="jira.js"></script>
+</body>
+</html>
