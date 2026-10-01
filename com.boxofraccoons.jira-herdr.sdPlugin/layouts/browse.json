@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.elgato.com/streamdeck/plugins/layout.json",
+	"id": "com.boxofraccoons.jira-herdr.browse",
+	"items": [
+		{ "key": "heading", "type": "text", "rect": [12, 6, 130, 20], "font": { "size": 14, "weight": 600 }, "color": "#8E8E93", "alignment": "left" },
+		{ "key": "position", "type": "text", "rect": [142, 6, 48, 20], "font": { "size": 14, "weight": 400 }, "color": "#8E8E93", "alignment": "right" },
+		{ "key": "name", "type": "text", "rect": [12, 32, 178, 34], "font": { "size": 24, "weight": 700 }, "color": "#FFFFFF", "alignment": "left", "text-overflow": "ellipsis" },
+		{ "key": "detail", "type": "text", "rect": [12, 70, 178, 22], "font": { "size": 16, "weight": 400 }, "color": "#8E8E93", "alignment": "left", "text-overflow": "ellipsis" }
+	]
+}

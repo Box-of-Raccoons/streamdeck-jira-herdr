@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>Ticket Dial Settings</title>
+	<meta charset="utf-8" />
+	<script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+</head>
+<body>
+	<sdpi-item label="Prompt">
+		<sdpi-textfield setting="prompt" placeholder="/work-ticket {key}"></sdpi-textfield>
+	</sdpi-item>
+	<sdpi-item>
+		<p style="margin:0;font-size:9pt;opacity:.7">Sent to the new agent. {key}, {summary} and {url} are filled in.</p>
+	</sdpi-item>
+	<sdpi-item label="Folder">
+		<sdpi-textfield setting="folder" placeholder="~"></sdpi-textfield>
+	</sdpi-item>
+	<sdpi-item label="Agent">
+		<sdpi-select setting="agent" default="claude">
+			<option value="claude">claude</option>
+			<option value="codex">codex</option>
+			<option value="gemini">gemini</option>
+			<option value="opencode">opencode</option>
+			<option value="cursor">cursor</option>
+			<option value="copilot">copilot</option>
+			<option value="amp">amp</option>
+			<option value="cline">cline</option>
+			<option value="kiro">kiro</option>
+			<option value="droid">droid</option>
+			<option value="grok">grok</option>
+			<option value="qwen">qwen</option>
+			<option value="pi">pi</option>
+			<option value="devin">devin</option>
+			<option value="agy">agy</option>
+			<option value="kimi">kimi</option>
+			<option value="hermes">hermes</option>
+			<option value="kilo">kilo</option>
+			<option value="qodercli">qodercli</option>
+			<option value="letta">letta</option>
+			<option value="maki">maki</option>
+			<option value="muse">muse</option>
+		</sdpi-select>
+	</sdpi-item>
+	<sdpi-item label="Terminal app">
+		<sdpi-file global setting="terminalApp" accept=".app" label="Choose App..."></sdpi-file>
+	</sdpi-item>
+	<sdpi-item label="Bring forward">
+		<sdpi-checkbox global setting="raise" default="true" label="Raise it after sending"></sdpi-checkbox>
+	</sdpi-item>
+	<sdpi-item>
+		<p style="margin:0;font-size:9pt;opacity:.7">Press the dial twice to send: once to arm, again within 3 seconds. Turning cancels. The ticket opens in a new herdr tab in the focused workspace. None chosen means Terminal.</p>
+	</sdpi-item>
+	<script src="jira.js"></script>
+</body>
+</html>

@@ -40,9 +40,10 @@ What changed from the Deckhand page (2026-09-30 layout):
 
 1. `session.snapshot`; refuse if a live agent already has this ticket's name (a double send before the next refresh).
 2. `tab.create {workspace_id: focused, cwd, label: KEY, focus: true}`.
-3. `agent.start {name: key-lowercased, kind, pane_id, timeout_ms: 90000}`; returns when the agent is ready.
-4. `agent.prompt {target: name, text}`.
-5. Bring the terminal app forward; refresh tickets about 20 s later.
+3. `agent.start {name: key-lowercased, kind, pane_id, timeout_ms: 90000}`.
+4. Poll `agent.get` until `interactive_ready` and not `launch_pending` (90 s cap); refuse if the agent is `blocked` (a dialog in its tab). Added during the build, see Status.
+5. `agent.prompt {target: name, text}`.
+6. Bring the terminal app forward; refresh tickets about 20 s later.
 
 On a failed step: alert, log, leave the tab for inspection, never retry a prompt.
 
@@ -65,6 +66,26 @@ One service holds the ticket list for every action, so a page swipe never shows 
 - Stage named paths. No AI attribution in commits.
 - Jira: reads only.
 
-## Status
+## Status (2026-10-01, end of the build session)
 
-(filled in at the end of the build)
+Built on `feature/jira-actions`, merged to `develop`: the three actions, the shared ticket service, Keychain token storage, the settings panels, images, CI and release workflows copied from herdr Control. 77 tests. A mutation pass (with a no-op control that survived, as it must) caught every mutant but one equivalent one: `readToken` skipping its exit-code check still returns null, because a missing item prints nothing.
+
+Checked for real:
+
+- Jira: `scripts/preview.mts` against my home Jira: 28 tickets in open sprints, 7 To Do (GYM 4, MP 1, SDTB 2). WF has none in an open sprint (Kanban), as expected.
+- herdr: a send of SDTB-2 with a harmless prompt and focus off. It worked after one fix (below), the duplicate send was refused, and the test tab was closed.
+- Keychain: add, update, read and the not-found exit code (44), with a throwaway item, deleted afterward.
+
+Found while building:
+
+- **Over the socket, `agent.start` does not wait for the agent.** It returns in about 100 ms with `launch_pending: true`, and `agent.prompt` then fails with `agent_not_ready` ("not an active named agent"). The CLI's `herdr agent start` waits; the socket method doesn't. Fixed by polling `agent.get` (about 4 s for Claude here). Regression test seen red with the fix reverted.
+- `security -i` returns the failed command's exit status, so a failed save is detectable.
+- A credentials change while a fetch is in flight: the old answer is thrown away so the old site's tickets never show, even briefly.
+
+Open:
+
+- Nothing has run on the device: the panels (token box, status dropdown), dial feel, strip text fit, key image. Needs Hardy.
+- The SDTB test board shows on the dials (deckhand refused it). No refuse list here; add one if it gets in the way.
+- Jira scoped API tokens (api.atlassian.com/ex/jira/{cloudId}) aren't supported, only classic tokens on the site URL.
+- No token-expiry warning yet.
+- No GitHub remote; nothing pushed.
