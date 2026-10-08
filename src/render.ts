@@ -64,7 +64,8 @@ export interface StatusKeyView {
 export function statusKey(v: StatusKeyView): string {
 	const top = text(72, 30, 20, GREY, fit(v.project, 10));
 	if (!v.status) return svg(top + text(72, 86, 22, GREY, "pick a") + text(72, 112, 22, GREY, "status"));
-	const caption = text(72, 130, 19, WHITE, fit(v.status, 12));
+	// Grey like herdr Control's captions: white this close to the edge reflects in the keycap.
+	const caption = text(72, 130, 19, GREY, fit(v.status, 12));
 	if (v.count == null) {
 		const words = v.problem ? PROBLEM_WORDS[v.problem.kind] : "loading";
 		const mark = v.problem ? text(72, 86, 52, v.problem.kind === "setup" ? GREY : ORANGE, "!", ` font-weight="bold"`) : "";
