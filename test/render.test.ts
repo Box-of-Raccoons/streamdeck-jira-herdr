@@ -14,6 +14,11 @@ describe("statusKey", () => {
 		expect(svg).toContain(">In Progress</text>");
 	});
 
+	it("draws the status name grey: a white caption reflects in the keycap edge", () => {
+		expect(statusKey(base)).toContain(`fill="${GREY}">In Progress</text>`);
+		expect(statusKey({ ...base, count: null, problem: null })).toContain(`fill="${GREY}">In Progress</text>`);
+	});
+
 	it("dims a zero count", () => {
 		expect(statusKey({ ...base, count: 0 })).not.toContain(`fill="${CATEGORY_COLORS.indeterminate}"`);
 	});
